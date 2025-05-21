@@ -1,11 +1,25 @@
 import React from 'react';
 import { View, Text, Button, StyleSheet, Dimensions, TextInput } from 'react-native';
+import { useState } from 'react';
 
 const windowWidth = Dimensions.get('window').width;
 
 export default function LoginScreen({ navigation }) {
 
-    let login;
+    const rusername = 'Jonas';
+    const rpassword = 'banana123';
+
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+
+    function verificarLogin(){
+        if (username === rusername && password === rpassword) {
+            navigation.navigate('Home');
+        }
+        else{
+            alert("Wrong username or password!");
+        }
+    }
 
     return (
         <View style={styles.container}>
@@ -14,15 +28,23 @@ export default function LoginScreen({ navigation }) {
             <Text style={styles.title}>Welcome!</Text>
             <TextInput
                 style={styles.input}
-                placeholder="Login"
+                placeholder="Username"
                 keyboardType="text"
-                value={login}
+                value={username}
+                onChangeText={setUsername}
                 />
+                <TextInput
+                secureTextEntry={true}
+                style={styles.input}
+                placeholder="Password"
+                keyboardType="text"
+                value={password}
+                onChangeText={setPassword}
+                />  
             <View style={styles.buttonContainer}>
-                <Button
-                title="Log-in"
-                onPress={() => navigation.navigate('Home')}
-                />
+               <Button
+                title="Join"
+                onPress={verificarLogin}/> 
             </View>
         </View>
     );
@@ -44,5 +66,13 @@ const styles = StyleSheet.create({
         margin: 10,
         width: windowWidth * 0.5,
         borderRadius: 5,
+    },
+    input: {
+        paddingLeft: 10,
+        width: windowWidth * 0.5,
+        borderWidth: 1, 
+        borderColor: '#00000',
+        borderRadius: 5,
+        margin: 5,
     },
 });
