@@ -42,7 +42,7 @@
 ---
 
 ***FEATURES***
-- O projeto possui um sistema de Login e Cadastro, utilizando Async Storage para salvar tanto o cadastro quanto se o usuário está logado ou não e também permite a navegação entre telas em forma de pilha (Stack).
+- O projeto possui um sistema de Login e Cadastro, utilizando Async Storage para salvar tanto o cadastro quanto se o usuário está logado ou não e também permite a navegação entre telas em forma de pilha (Stack.Navigator).
 
 ***Desenvolvedores:***
 
