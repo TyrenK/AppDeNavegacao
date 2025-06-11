@@ -1,14 +1,11 @@
 import React from 'react';
-import { View, Text, Button, StyleSheet, Dimensions, TextInput } from 'react-native';
+import { TouchableOpacity, View, Text, Button, StyleSheet, Dimensions, TextInput } from 'react-native';
 import { useState, useEffect } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const windowWidth = Dimensions.get('window').width;
 
 export default function LoginScreen({ navigation }) {
-
-    const rusername = 'Jonas';
-    const rpassword = 'banana123';
 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
@@ -28,28 +25,28 @@ export default function LoginScreen({ navigation }) {
         statusLogin();
     }, []);
 
-    function verificarLogin(){
-        if (username === rusername && password === rpassword) {
-            try {
-                AsyncStorage.setItem('userLogged', 'logged');
+    async function verificarLogin(){
+        try {
+            const savedUsername = await AsyncStorage.getItem('savedUsername');
+            const savedPassword = await AsyncStorage.getItem('savedPassword');
+    
+            if (username === savedUsername && password === savedPassword) {
+                await AsyncStorage.setItem('userLogged', 'logged');
                 navigation.navigate('Home');
-            } catch (error) {
-                console.error('Error saving the login status:', error);
-                alert('Error saving the login status. Try again.');
+            } else {
+                alert('Wrong username or password!');
             }
+        } catch (error) {
+            console.error('Error during login:', error);
+            alert('Login failed. Try again.');
         }
-        else{
-            alert("Wrong username or password!");
-        }
-
-        
     }
 
     return (
         <View style={styles.container}>
 
-            <Text style={styles.title}>Login Screen</Text>
-            <Text style={styles.title}>Welcome!</Text>
+            <Text style={styles.titleMain}>Login Screen</Text>
+            <Text style={styles.titleSub}>Welcome!</Text>
             <TextInput
                 style={styles.input}
                 placeholder="Username"
@@ -65,11 +62,12 @@ export default function LoginScreen({ navigation }) {
                 value={password}
                 onChangeText={setPassword}
                 />  
-            <View style={styles.buttonContainer}>
-               <Button
-                title="Join"
-                onPress={verificarLogin}/> 
-            </View>
+            <TouchableOpacity style={styles.customButton} onPress={verificarLogin}>
+                <Text style={styles.customButtonText}>Join</Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => navigation.navigate('SignUp')}>
+                <Text style={styles.SignUpText}>Don't Have a Log-in? Sign-up Here!</Text>
+            </TouchableOpacity>
         </View>
     );
 }
@@ -81,22 +79,40 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: '#F0F8FF',
     },
-    title: {
-        fontSize: 24,
+    titleMain: {
+        fontSize: 28,
+        fontWeight: 'bold',
+        marginBottom: 10,
+      },
+      titleSub: {
+        fontSize: 20,
         marginBottom: 20,
+        color: '#666',
     },
-    buttonContainer: {
-        backgroundColor: '#add8e6',
-        margin: 10,
-        width: windowWidth * 0.5,
+    customButton: {
+        backgroundColor: '#dda0dd',
+        padding: 10,
         borderRadius: 5,
-    },
+        alignItems: 'center',
+        width: windowWidth * 0.5,
+        margin: 10,
+      },
+      customButtonText: {
+        color: '#fff',
+        fontSize: 16,
+        fontWeight: 'bold',
+      },
     input: {
         paddingLeft: 10,
         width: windowWidth * 0.5,
         borderWidth: 1, 
-        borderColor: '#00000',
+        borderColor: '#ccc',
         borderRadius: 5,
         margin: 5,
+    },
+    SignUpText: {
+        color: 'gray',
+        fontSize: 12,
+        textDecorationLine: 'underline'
     },
 });
