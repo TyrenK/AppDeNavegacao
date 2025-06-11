@@ -1,10 +1,10 @@
 ***APLICATIVO DE NAVEGAÇÃO ENTRE TELAS:***
 
+---
+
 ***REQUISITOS***
 
   - NodeJS instalado na máquina.
-
----
 
 ***INSTALAÇÃO***
 
