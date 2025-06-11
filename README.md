@@ -2,10 +2,6 @@
 
 ---
 
-***REQUISITOS***
-
-  - NodeJS instalado na máquina.
-
 ***INSTALAÇÃO***
 
 - Para baixar o repositório, utilize o comando:
