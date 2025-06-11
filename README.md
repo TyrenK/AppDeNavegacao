@@ -6,7 +6,7 @@
 
 - Para baixar o repositório, utilize o comando:
 
-      git clone https://github.com/TyrenK/PAM--Ativ-CalculadoraIMC.git
+      git clone https://github.com/TyrenK/AppDeNavegacao.git
 - Entre no diretório do repositório
   
       cd AppDeNavegacao
