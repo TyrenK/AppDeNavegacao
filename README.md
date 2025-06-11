@@ -46,4 +46,4 @@
 
 ***Desenvolvedores:***
 
-Luca Miguel Peres Bizinotto ([**TyrenK**])(https://github.com/TyrenK).
+Luca Miguel Peres Bizinotto [**TyrenK**](https://github.com/TyrenK).
